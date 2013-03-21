@@ -1,4 +1,5 @@
 import socket
+from struct import *
 
 print "Creating Socket...."
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -13,6 +14,11 @@ while True:
 	print "Got connections from", clientsock.getpeername()
 	print "Client socket addr is", clientaddr
 	while True:
-		message = clientsock.recv()
-		print "I receife:"+message
+		message = clientsock.recv(1024)
+		if not message:
+			break
+		print "I receive:",
+		for i in message:
+			print "%x",	%(ord(i),)
+			print
 #	clientsock.close()
