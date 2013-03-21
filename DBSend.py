@@ -34,8 +34,11 @@ def main():
     #MySQLdb respect the data as string, so I have to convert the data into string to store in MySQL
     cur.execute(sql_select, [str(DevAddr), str(SensorId), str(SensorDataId)])
     result = cur.fetchone()
+    print result
+    for i in result:
+        print i
     DataRcv = result[0]
-    socket_pack = pack("BBBB", DevAddr, SensorId, SensorDataId, DataRcv)
+    socket_pack = pack("BBBh", DevAddr, SensorId, SensorDataId, DataRcv)
     SensorDataId = 2
     s.sendall(socket_pack)
     cur.execute(sql_select, [str(DevAddr), str(SensorId), str(SensorDataId)])

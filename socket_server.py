@@ -18,7 +18,8 @@ while True:
 		if not message:
 			break
 		print "I receive:",
-		for i in message:
+		rcv_pkt = upack("BBBh", message)
+		for i in recv:
 			print "%x"	%(ord(i),),
-			print "Received"
+		print "Received"
 #	clientsock.close()
