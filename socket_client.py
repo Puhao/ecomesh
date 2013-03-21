@@ -1,4 +1,13 @@
 import socket
+from struct import *
+
+a = 0x11
+b = 0x42
+c = 0x54
+d = 100
+num = pack("BBBB", a, b, c, d)
+print num
+
 
 print "Creating Socket...."
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,4 +24,4 @@ except socket.error, e:
 print "Done"
 print "Conneting from", s.getsockname()
 print "Connecting to", s.getpeername()
-s.sendall("What a fucking try!")
+s.sendall(num)
