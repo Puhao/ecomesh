@@ -15,3 +15,4 @@ except socket.error, e:
 print "Done"
 print "Conneting from", s.getsockname()
 print "Connecting to", s.getpeername()
+s.sendall("What a fucking try!")

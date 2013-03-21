@@ -12,4 +12,7 @@ while True:
 	clientsock, clientaddr = s.accept()
 	print "Got connections from", clientsock.getpeername()
 	print "Client socket addr is", clientaddr
+	while True:
+		message = clientsock.recv()
+		print "I receife:"+message
 #	clientsock.close()
