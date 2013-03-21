@@ -19,6 +19,6 @@ while True:
 			break
 		print "I receive:",
 		for i in message:
-			print "%x",	%(ord(i),)
-			print
+			print "%x"	%(ord(i),),
+			print "Received"
 #	clientsock.close()
