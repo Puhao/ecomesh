@@ -3,7 +3,7 @@ from struct import *
 
 print "Creating Socket...."
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-port = 51423
+port = 51234
 host = ''
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((host, port))
@@ -17,9 +17,8 @@ while True:
 		message = clientsock.recv(1024)
 		if not message:
 			break
-		print "I receive:",
-		rcv_pkt = upack("BBBh", message)
-		for i in recv:
-			print "%x"	%(ord(i),),
+		print "I receive:"+message
+		for i in message:
+			print "%x "	%(ord(i),),
 		print "Received"
 #	clientsock.close()

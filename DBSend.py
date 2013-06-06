@@ -4,6 +4,7 @@ from ZigSerial import ZigSerial
 from time import *
 from struct import *
 import socket
+import crc16
     
 SerialPort = '/dev/ttyAMA0'
 baudrate = 115200
@@ -14,6 +15,11 @@ cur = db.cursor()
 sql_insert = "INSERT INTO device_data(DevAddr, SensorId, SensorDataId, DataRcv) VALUES(%s, %s, %s, %s)"
 sql_select = "SELECT DataRcv from device_data where DevAddr=%s && SensorId=%s && SensorDataId=%s order by DataId desc limit 1"
 
+def CrcCal(crc, list):
+    crc = 0;
+    for i in list:
+        crc = crc16.crc16xmodem(i, crc)
+    return crc
 
 def main():
     print "Creating Socket...."
