@@ -177,21 +177,23 @@ def weibo_weather_message():
         for i in SensorList:
             SensorMessage = SensorList[i]
             WeatherSituationMess += SensorMessage[0] + str(SensorMessage[3]) + SensorMessage[1] + ","
-        WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess + "的样子。"
+        WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess + "就这么个样子。"
         MessageQueue.put(WeatherSituationMess)
         sleep(70)
+    return
 
 
 def post_weibo(client):
-    MessageToPost = MessageQueue.get()
-    try:
-        MessagePostBack = client.statuses.update.post(status= MessageToPost)
-        for i in MessagePostBack:
-            print i,
-            print ":",
-            print MessagePostBack[i]
-    except:
-        print "Post Weibo Error"
+    while True:
+        MessageToPost = MessageQueue.get()
+        try:
+            MessagePostBack = client.statuses.update.post(status= MessageToPost)
+            for i in MessagePostBack:
+                print i,
+                print ":",
+                print MessagePostBack[i]
+        except:
+            print "Post Weibo Error"
     return
 
 def main():
