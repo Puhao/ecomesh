@@ -177,9 +177,9 @@ def weibo_weather_message():
         for i in SensorList:
             SensorMessage = SensorList[i]
             WeatherSituationMess += SensorMessage[0] + str(SensorMessage[3]) + SensorMessage[1] + ","
-        WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess + "那今天是个xx天啊！"
+        WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess + "的样子。"
         MessageQueue.put(WeatherSituationMess)
-        sleep(2572)
+        sleep(70)
 
 
 def post_weibo(client):
