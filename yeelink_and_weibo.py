@@ -186,7 +186,7 @@ def weibo_weather_message():
         WeatherLock.acquire()
         WeatherSituationMess = weather_info()
         WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess
-        acquire.release()
+        WeatherLock.release()
         MessageQueue.put(WeatherSituationMess)
         sleep(3583)
     return
@@ -220,6 +220,7 @@ def good_morning():
             WeatherLock.acquire()
             Message += weather_info()
             WeatherLock.release()
+            MessageQueue.put(Message)
 
 def post_weibo(client):
     while True:
