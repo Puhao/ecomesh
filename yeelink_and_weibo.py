@@ -168,16 +168,18 @@ def yeelink_data_send(thread_num):
     return
 
 def weibo_weather_message():
-    for i in WeatherQueueList:
-        while not WeatherQueueList[i].empty():
+    while True:
+        for i in WeatherQueueList:
+            while not WeatherQueueList[i].empty():
+                SensorList[i][3] = WeatherQueueList[i].get()
             SensorList[i][3] = WeatherQueueList[i].get()
-        SensorList[i][3] = WeatherQueueList[i].get()
-    WeatherSituationMess = "天气情况："
-    for i in SensorList:
-        SensorMessage = SensorList[i]
-        WeatherSituationMess += SensorMessage[0] + str(SensorMessage[3]) + SensorMessage[1] + ","
-    WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess + "等。" + "那今天是个xx天啊！"
-    MessageToPost.put(WeatherSituationMess)
+        WeatherSituationMess = "天气情况："
+        for i in SensorList:
+            SensorMessage = SensorList[i]
+            WeatherSituationMess += SensorMessage[0] + str(SensorMessage[3]) + SensorMessage[1] + ","
+        WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess + "等。" + "那今天是个xx天啊！"
+        MessageQueue.put(WeatherSituationMess)
+        sleep(2572)
 
 
 def post_weibo(client):
