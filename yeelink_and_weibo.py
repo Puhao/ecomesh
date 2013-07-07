@@ -246,6 +246,12 @@ def main():
     client.set_access_token(access_token, expires_in)
 
     #thread
+    find_dawn_thread = Thread(target=find_dawn)
+    thread_list.append(find_dawn_thread)
+
+    good_morning_thread = Thread(target=good_morning)
+    thread_list.append(good_morning_thread)
+    
     weibo_weather_message_thread = Thread(target=weibo_weather_message)
     thread_list.append(weibo_weather_message_thread)
 
