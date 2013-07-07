@@ -194,9 +194,9 @@ def weibo_weather_message():
 def find_dawn():
     DawnWait = True
     while True:
-        if "235813" == strftime("%H%m%S",localtime()):
+        if "020000" == strftime("%H%M%S",localtime()):
             DawnWait = True
-        if strftime("%H%m%S",localtime()) == "030000":
+        if strftime("%H%M%S",localtime()) == "040000":
             if DawnWait:
                 DawnWait = False
                 while(SensorList[0x05][3] < 3):
@@ -210,7 +210,7 @@ def find_dawn():
 
 def good_morning():
     while True:
-        if "073030" == strftime("%H%m%S",localtime()):
+        if "073030" == strftime("%H%M%S",localtime()):
             if (SensorList[0x05][3]) < 8000:
                 Message = "早上光照不是很强，不会被晒死。"
             else:
@@ -251,7 +251,7 @@ def main():
 
     good_morning_thread = Thread(target=good_morning)
     thread_list.append(good_morning_thread)
-    
+
     weibo_weather_message_thread = Thread(target=weibo_weather_message)
     thread_list.append(weibo_weather_message_thread)
 
