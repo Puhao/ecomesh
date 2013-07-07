@@ -204,7 +204,7 @@ def find_dawn():
                 WeatherLock.acquire()
                 WeatherSituationMess = weather_info()
                 WeatherLock.release()
-                Message = "我勒个去，天已经开始亮了啊！" + WeatherSituationMess + "开始有光照到阳台了！可以去老和山看日出o(╯□╰)o"
+                Message = "我勒个去，天已经开始亮了啊！" + WeatherSituationMess + "开始有光照到阳台了！屌丝们，该起床洗洗干活啦o(╯□╰)o"
                 MessageQueue.put(Message)
     return
 
@@ -214,7 +214,7 @@ def good_morning():
             if (SensorList[0x05][3]) < 8000:
                 Message = "早上光照不是很强，不会被晒死。"
             else:
-                Message = "光照这么强，一个大晴天啊。"
+                Message = "早上光照这么强，一个大晴天啊。"
             if (SensorList[0x02][3]) > 92:
                 Message += "大早上湿度这么大，下雨了。"
             WeatherLock.acquire()
