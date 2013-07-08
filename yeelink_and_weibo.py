@@ -124,6 +124,7 @@ def sensor_data_receive():
             DataQueue.put(ZigData)
             if zig.SensorDataId in SensorList:
                 data = zig.SensorDataGet * SensorList[zig.SensorDataId][2]
+                SensorList[zig.SensorDataId[3]] = data
                 WeatherQueueList[zig.SensorDataId].put(data)
 
     return
