@@ -1,11 +1,9 @@
 ecomesh
 =======
-##	What is it 
-I use raspberry pi and arduion to setup my ecology mesh project.  
-I use Raspberry Pi as my Wireless Station. It receive the data from the zigbee-serial module whick I bought on taobao.  
-##	How it works  
-I use MySQL to store the data which I received. I have setup up my own communication protocol.  
-## What I want to do
-I will use the Django framework to setup a website to demonstrate the sensor data, what's more, I will develop my our app to control the device.
-## Why I do this
-Just for fun
+##目前进展
+目前采集了环境温度、湿度、大气压、光照强度。  
+##数据展示
+目前把数据发送到yeelink的网站，[点击查看数据](http://www.yeelink.net/devices/3762# "阳台大叔")  
+另外利用weibo的SDK，同时在weibo更新一些数据。[点击查看微博](http://weibo.com/u/3551343502 "阳台大叔")
+##计划安排
+可以再加入几个无线节点，然后利用自己的web平台展示数据，同时加入微信公共平台，weibo内容多样化，微博还可以加入图片。
