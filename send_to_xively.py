@@ -84,7 +84,7 @@ def sensor_data_receive():
             XivelyQueue.put(ZigData)
     return
 
-def xively_data_send(thread_num):
+def xively_data_send():
     while True:
         data = XivelyQueue.get()
         if DEBUG:
@@ -107,16 +107,24 @@ def xively_data_send(thread_num):
         sleep(1)
     return
 
-
+def queue_info():
+    while True:
+        print "Size:", XivelyQueue.qzise()
+        data = XivelyQueue.get()
+        print data
+        sleep(3)
+    return
 
 def main():
     receive_thread = Thread(target=sensor_data_receive)
     thread_list.append(receive_thread)
 
     #start send data
-    for i in range(1):
-        send_thread = Thread(target=xively_data_send,args=(i,))
-        thread_list.append(send_thread)
+    #send_thread = Thread(target=xively_data_send)
+    #thread_list.append(send_thread)
+
+    send_thread = Thread(target=queue_info)
+    thread_list.append(send_thread)
 
     for i in thread_list:
         i.start()
