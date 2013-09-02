@@ -63,7 +63,7 @@ DataAdj = { 0x01:0.01,
 #xively Sensor Data datastream addr [FEED_ID, Channel]
 XiveDataPoint = { 0x6d0501:["1768542106","temperature"],
                  0x6d0502:["1768542106","humidity"],
-                 0x6d0305:["1768542106","illumation"],
+                 0x6d0305:["1768542106","illumination"],
                  0x6d0b0b:["1768542106","pressure"],
                  }
 
