@@ -110,9 +110,11 @@ def xively_data_send(thread_num):
         datastream.current_value = data["SensorData"]
         datastream.at = datetime.datetime.utcnow()
         try:
-          datastream.update()
+            datastream.update()
         except requests.HTTPError as e:
-          print "HTTPError({0}): {1}".format(e.errno, e.strerror)
+            print "HTTPError({0}): {1}".format(e.errno, e.strerror)
+    return
+
 
 
 def main():
@@ -120,7 +122,7 @@ def main():
     thread_list.append(receive_thread)
 
     #start send data
-    for i in range(0,4):
+    for i in range(1):
         send_thread = Thread(target=xively_data_send,args=(i,))
         thread_list.append(send_thread)
 
