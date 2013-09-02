@@ -4,7 +4,7 @@ var page = require('webpage').create(),
     address;
 var weibo_userid = system.args[1]
 var weibo_passwd = system.args[2]
-var startUrl = "https://api.weibo.com/oauth2/authorize?client_id=204574897&redirect_uri=www.renren.com/yuanpuhao/&response_type=token";
+var startUrl = "https://api.weibo.com/oauth2/authorize?client_id=204574897&redirect_uri=www.renren.com/yuanpuhao&response_type=token";
 var verify_weibo_freeze = false;
 page.onResourceReceived = function (res,network) {
     if (res.stage == "end") {
