@@ -45,11 +45,6 @@ XivelyQueue = Queue()
 #thread list
 thread_list = []
 
-#Zigbee ecomesh data type
-ZigData = { "DevAddr":0x11,
-            "SensorId":0x3,
-            "SensorDataId":0x01,
-            "SensorData":0x11}
 #Data Adjust
 DataAdj = { 0x01:0.01,
             0x02:0.01,
@@ -73,6 +68,7 @@ def sensor_data_receive():
     while True:
         zig.pkt_rcv()
         if (zig.RcvFlag):
+            ZigData = {}
             ZigData["DevAddr"] = zig.DevAddr
             ZigData["SensorId"] = zig.SensorId
             ZigData["SensorDataId"] = zig.SensorDataId
@@ -109,7 +105,7 @@ def xively_data_send():
 
 def queue_info():
     while True:
-        print "Size:", XivelyQueue.qzise()
+        print "Size:", XivelyQueue.qsize()
         data = XivelyQueue.get()
         print data
         sleep(3)
