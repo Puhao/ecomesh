@@ -234,7 +234,7 @@ def weibo_weather_message():
     while True:
         WeatherLock.acquire()
         WeatherSituationMess = weather_info()
-        WeatherSituationMess = "我去年买两个表，这个时间点" + WeatherSituationMess
+        WeatherSituationMess = "正在朝北的阳台上站岗的大叔报告，这个时间点" + WeatherSituationMess
         WeatherLock.release()
         MessageQueue.put(WeatherSituationMess)
         sleep(12583)
@@ -263,7 +263,7 @@ def good_morning():
             if (SensorList[0x05][3]) < 8000:
                 Message = "早上光照不是很强，不会被晒死。"
             else:
-                Message = "早上光照这么强，一个大晴天啊。"
+                Message = "早上光照这么强，估计要被晒死了。"
             if (SensorList[0x02][3]) > 92:
                 Message += "大早上湿度这么大，下雨了。"
             WeatherLock.acquire()
