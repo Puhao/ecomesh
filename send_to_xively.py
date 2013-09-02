@@ -73,10 +73,11 @@ def sensor_data_receive():
     while True:
         zig.pkt_rcv()
         if (zig.RcvFlag):
-            print "DevAddr =", zig.DevAddr,
-            print "SensorId =", zig.SensorId,            
-            print "SensorDataId =", zig.SensorDataId,
-            print "SensorDataGet =", zig.SensorDataGet
+            if DEBUG:
+                print "DevAddr =", zig.DevAddr,
+                print "SensorId =", zig.SensorId,            
+                print "SensorDataId =", zig.SensorDataId,
+                print "SensorDataGet =", zig.SensorDataGet
 
             ZigData["DevAddr"] = zig.DevAddr
             ZigData["SensorId"] = zig.SensorId
@@ -84,6 +85,8 @@ def sensor_data_receive():
             ZigData["SensorData"] = zig.SensorDataGet
             if ZigData["SensorDataId"] in DataAdj:
                 ZigData["SensorData"] = ZigData["SensorData"] * DataAdj[ZigData["SensorDataId"]]
+            if DEBUG:
+                print "Queue Put:", ZigData
             XivelyQueue.put(ZigData)
     return
 
