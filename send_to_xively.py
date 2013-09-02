@@ -73,12 +73,6 @@ def sensor_data_receive():
     while True:
         zig.pkt_rcv()
         if (zig.RcvFlag):
-            if DEBUG:
-                print "DevAddr =", zig.DevAddr,
-                print "SensorId =", zig.SensorId,            
-                print "SensorDataId =", zig.SensorDataId,
-                print "SensorDataGet =", zig.SensorDataGet
-
             ZigData["DevAddr"] = zig.DevAddr
             ZigData["SensorId"] = zig.SensorId
             ZigData["SensorDataId"] = zig.SensorDataId
@@ -92,10 +86,7 @@ def sensor_data_receive():
 
 def xively_data_send(thread_num):
     while True:
-        try:
-            data = XivelyQueue.get()
-        except Queue.Empty:
-            print "Queue Empty"
+        data = XivelyQueue.get()
         if DEBUG:
             print "I get data:",data
         tmp = data["DevAddr"]
@@ -105,14 +96,15 @@ def xively_data_send(thread_num):
         if tmp in XiveDataPoint:
             FEED_ID = XiveDataPoint[tmp][0]
             Channel = XiveDataPoint[tmp][1]
-        feed = api.feeds.get(FEED_ID)
-        datastream = get_datastream(feed,Channel)
-        datastream.current_value = data["SensorData"]
-        datastream.at = datetime.datetime.utcnow()
-        try:
-            datastream.update()
-        except requests.HTTPError as e:
-            print "HTTPError({0}): {1}".format(e.errno, e.strerror)
+            feed = api.feeds.get(FEED_ID)
+            datastream = get_datastream(feed,Channel)
+            datastream.current_value = data["SensorData"]
+            datastream.at = datetime.datetime.utcnow()
+            try:
+                datastream.update()
+            except requests.HTTPError as e:
+                print "HTTPError({0}): {1}".format(e.errno, e.strerror)
+        sleep(1)
     return
 
 
