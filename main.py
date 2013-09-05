@@ -197,25 +197,28 @@ def yeelink_data_send(thread_num):
 
 def xively_data_send():
     while True:
-        data = XivelyQueue.get()
-        if DEBUG:
-            print "I get data:",data
-        tmp = data["DevAddr"]
-        tmp = tmp << 8 | data["SensorId"]
-        tmp = tmp << 8 | data["SensorDataId"]
-        #print "tmp = 0x%x"  %(tmp,)
-        if tmp in XiveDataPoint:
-            FEED_ID = XiveDataPoint[tmp][0]
-            Channel = XiveDataPoint[tmp][1]
-            feed = api.feeds.get(FEED_ID)
-            datastream = get_datastream(feed,Channel)
-            datastream.current_value = data["SensorData"]
-            datastream.at = datetime.datetime.utcnow()
-            try:
-                datastream.update()
-            except requests.HTTPError as e:
-                print "HTTPError({0}): {1}".format(e.errno, e.strerror)
-        sleep(1)
+        try:
+            data = XivelyQueue.get()
+            if DEBUG:
+                print "I get data:",data
+            tmp = data["DevAddr"]
+            tmp = tmp << 8 | data["SensorId"]
+            tmp = tmp << 8 | data["SensorDataId"]
+            #print "tmp = 0x%x"  %(tmp,)
+            if tmp in XiveDataPoint:
+                FEED_ID = XiveDataPoint[tmp][0]
+                Channel = XiveDataPoint[tmp][1]
+                feed = api.feeds.get(FEED_ID)
+                datastream = get_datastream(feed,Channel)
+                datastream.current_value = data["SensorData"]
+                datastream.at = datetime.datetime.utcnow()
+                try:
+                    datastream.update()
+                except requests.HTTPError as e:
+                    print "HTTPError({0}): {1}".format(e.errno, e.strerror)
+            sleep(1)
+        except:
+            print "Xively Send Error!"
     return
 
 def weather_info():
